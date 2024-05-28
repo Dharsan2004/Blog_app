@@ -1,4 +1,7 @@
 class ArticlesController < ApplicationController
+    
+  
+    
     def new
         @article = Article.new 
     end
@@ -45,7 +48,9 @@ class ArticlesController < ApplicationController
 
 
     def index 
-        @articles= Article.all
+
+        @articles = Article.page(params[:page]).per(3) 
+       
     end
 
 

@@ -1,0 +1,50 @@
+<div class="container mt-5">
+
+
+<% if @user.errors.any? %>
+  <div class="alert alert-warning" role="alert">
+    <ul>
+
+      <% @user.errors.full_messages.each do |message| %>
+        <li>  <%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+  <div class="row justify-content-center">
+
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <div class="mb-3">
+            <h1>New User Form</h1> <!-- Wrap the h1 inside a div -->
+          </div>
+          
+          <%= form_with url: signup_path , method: :post, local: true do |form| %>
+            <div class="mb-3">
+              <%= form.label :name, "Name", class: "form-label" %>
+              <%= form.text_field :name, class: "form-control" %>
+            </div>
+            <div class="mb-3">
+              <%= form.label :email, "Email", class: "form-label" %>
+              <%= form.email_field :email, class: "form-control" %>
+            </div>
+             <div class="mb-3">
+              <%= form.label :password, "Password", class: "form-label" %>
+              <%= form.password_field :password, class: "form-control" %>
+            </div>
+
+
+            <div class="text-center">
+              <%= form.submit "Submit", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

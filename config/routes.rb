@@ -9,4 +9,10 @@ Rails.application.routes.draw do
 
   resources :articles
 
+
+  #for SignUp for User
+
+  get "/signup" => "users#new"
+  post "/signup" => "users#create"
+  resources :users, except: [:new]
 end
