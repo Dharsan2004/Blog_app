@@ -1,4 +1,6 @@
-<h1 class="text-center mt-4"><%= @user.name %>'s profile</h1>
+<h1 class="text-center mt-4"><%= @user.name %>'s profile  <%= button_to "Edit Profile", edit_user_path(@user) , method: :get ,class: "btn btn-sm btn-outline-danger"  %> 
+
+ </h1> 
 
 
 
@@ -10,8 +12,12 @@
       <%= flash[:notice] %>
     </div>
   <% end %>
+
+
+
     <div class="col-md-8">
       <div class="mb-3">
+      
         <h1>List of Articles</h1>
       </div>
       <% @articles.each do |article| %>

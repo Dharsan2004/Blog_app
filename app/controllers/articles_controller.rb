@@ -1,7 +1,9 @@
 class ArticlesController < ApplicationController
     
-  
-    
+    before_action :require_user , expect: [:show,:index]  
+    before_action :require_same_user , only: [:edit , :update , :destroy]
+
+
     def new
         @article = Article.new 
     end
@@ -13,8 +15,8 @@ class ArticlesController < ApplicationController
         
         #hardcoding whcih user creating article
 
-        @article.user = User.first
-
+        @article.user_id = session[:user_id]
+ 
         if @article.save 
             p "done "
             flash[:notice] = "Article created successfully"
@@ -48,7 +50,6 @@ class ArticlesController < ApplicationController
 
 
     def index 
-
         @articles = Article.page(params[:page]).per(3) 
        
     end
@@ -72,4 +73,12 @@ private
         params.permit(:Title,:Description)
     end
 
+    def require_same_user
+        p Article.find_by(id: params[:id])
+        if session[:used_id] != Article.find_by(id: params[:id]).user.id 
+            flash[:notice]= "you can only edit or delete your own article"
+            redirect_to article_path(Article.find_by(id: params[:id]))
+        end
+        
+    end
 end

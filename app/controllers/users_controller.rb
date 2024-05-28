@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
     
+    
     def index
         @users= User.all 
 
@@ -15,6 +16,7 @@ class UsersController < ApplicationController
         @user = User.new(user_params)
         if @user.save
             flash[:notice] = "Welcome to Blog app #{@user.name} you have Signed Up "
+            session[:user_id] = @user.id
             redirect_to articles_path
         else
             render :new,status: :unprocessable_entity 
@@ -54,5 +56,7 @@ private
     def user_params
         params.permit(:name,:email,:password)
     end
+
+    
 
 end
