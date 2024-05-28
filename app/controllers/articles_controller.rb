@@ -7,9 +7,14 @@ class ArticlesController < ApplicationController
         p "post req hit"
         
         @article = Article.new(user_params)
+        
+        #hardcoding whcih user creating article
+
+        @article.user = User.first
 
         if @article.save 
             p "done "
+            flash[:notice] = "Article created successfully"
             redirect_to articles_path
         else
             render :new,status: :unprocessable_entity 
