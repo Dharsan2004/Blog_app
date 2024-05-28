@@ -1,4 +1,11 @@
 <div class="container mt-4">
+
+  <% if flash[:notice] != nil %>
+      <div class="alert alert-danger" role="alert">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+
     <div class="d-flex justify-content-center">
       <%= image_tag 'images.png', alt: 'Example Image', class: 'img-fluid mr-3' %>  
     </div>
