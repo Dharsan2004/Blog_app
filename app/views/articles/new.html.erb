@@ -1,0 +1,42 @@
+<div class="container mt-5">
+
+<% if @article.errors.any? %>
+  <div class="alert alert-warning" role="alert">
+    <ul>
+
+      <% @article.errors.full_messages.each do |message| %>
+        <li>  <%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+
+  <div class="row justify-content-center">
+
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <div class="mb-3">
+            <h1>New Article</h1> <!-- Wrap the h1 inside a div -->
+          </div>
+          
+          <%= form_with url: articles_path , method: :post, local: true do |form| %>
+            <div class="mb-3">
+              <%= form.label :Title, "Title", class: "form-label" %>
+              <%= form.text_field :Title, class: "form-control" %>
+            </div>
+            <div class="mb-3">
+              <%= form.label :Description, "Description", class: "form-label" %>
+              <%= form.text_area :Description, class: "form-control", rows: 5 %>
+            </div>
+            <div class="text-center">
+              <%= form.submit "Submit", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

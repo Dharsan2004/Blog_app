@@ -1,0 +1,16 @@
+<div class="container mt-5">
+   
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title"><%= @a.Title %></h5>
+        <p class="card-text"><%= @a.Description %></p>
+        <!-- Add more fields here as needed -->
+        <div class="btn-group">
+          <%= button_to "Edit", edit_article_path(@a), method: :get , class: "btn btn-sm btn-outline-secondary m-1" %>
+
+          <%= button_to "Delete", article_path(@a) , method: :delete ,class: "btn btn-sm btn-outline-danger"  %>
+        </div>
+      </div>
+    </div>
+ 
+</div>
