@@ -82,15 +82,27 @@ private
             p "vada punda"
             flash[:notice] = "You must me logged IN"
             redirect_to login_path
+        else
+            p "everyting ok !!!!!!"
         end
     end
+ 
+  
+
 
     def require_same_user
-        @article = Article.find(params[:id])
-        if session[:user_id] != @article.user.id
-          flash[:notice] = "You can only edit or delete your own article"
-          redirect_to article_path(@article)
+        @a = Article.find_by(id: params[:id])
+        p "hi da"
+        if session[:user_id] != @a.user.id 
+            p "wrong user id not same"
+            flash[:notice]= "you can only edit or delete your own article"
+            redirect_to article_path(@a)
         end
+        
     end
+      
+
+   
+      
       
 end

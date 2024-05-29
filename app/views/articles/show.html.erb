@@ -10,8 +10,8 @@
 
          <% if logged_in? && @a.user == current_user %>
         
-          <%= button_to "Edit", edit_article_path(@a), method: :PUT , class: "btn btn-sm btn-outline-secondary m-1" %>
-          <%= button_to "Delete", article_path(@a) , method: :DELETE ,class: "btn btn-sm btn-outline-danger"  %>
+          <%= button_to "Edit", edit_article_path(@a), method: :get , class: "btn btn-sm btn-outline-secondary m-1" %>
+          <%= button_to "Delete", article_path(@a) , method: :delete ,class: "btn btn-sm btn-outline-danger"  %>
           <% end %>
         </div>
       </div>
