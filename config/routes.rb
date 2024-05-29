@@ -22,4 +22,7 @@ Rails.application.routes.draw do
   get "/logout" => "sessions#destroy"
 
 
+
+  resources :categories , except: [:destroy]
+
 end

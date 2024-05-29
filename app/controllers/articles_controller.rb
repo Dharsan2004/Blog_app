@@ -87,8 +87,6 @@ private
         end
     end
  
-  
-
 
     def require_same_user
         @a = Article.find_by(id: params[:id])
