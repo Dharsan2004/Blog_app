@@ -1,9 +1,9 @@
 class ArticlesController < ApplicationController
     
-    before_action :require_user , expect: [:show,:index]  
-    before_action :require_same_user , only: [:edit , :update , :destroy]
-
-
+ 
+    before_action :require_user, except: [:show, :index]
+    before_action :require_same_user, only: [:edit, :update, :destroy]
+    
     def new
         @article = Article.new 
     end
@@ -29,6 +29,7 @@ class ArticlesController < ApplicationController
     end 
 
     def edit 
+        p "edit pages"
         id = params[:id]
         @article = Article.find_by(id: id)
     end
@@ -38,7 +39,7 @@ class ArticlesController < ApplicationController
         id = params[:id]
         @article = Article.find_by(id)
         @article.Title = params[:article][:Title]
-        @article.Description = params[:article][:Description]
+    @article.Description = params[:article][:Description]
 
         if @article.save 
             redirect_to article_path(@article)
@@ -56,11 +57,13 @@ class ArticlesController < ApplicationController
 
 
     def show 
+        p "its in show"
         id  = params[:id]
         @a = Article.find_by(id: id)
     end
 
     def destroy
+        p "geloo"
         id = params[:id]
         article = Article.find_by(id: id)
         article.destroy()
@@ -73,12 +76,21 @@ private
         params.permit(:Title,:Description)
     end
 
-    def require_same_user
-        p Article.find_by(id: params[:id])
-        if session[:used_id] != Article.find_by(id: params[:id]).user.id 
-            flash[:notice]= "you can only edit or delete your own article"
-            redirect_to article_path(Article.find_by(id: params[:id]))
+    def require_user
+        p "helo inside require user "
+        if session[:user_id] == nil 
+            p "vada punda"
+            flash[:notice] = "You must me logged IN"
+            redirect_to login_path
         end
-        
     end
+
+    def require_same_user
+        @article = Article.find(params[:id])
+        if session[:user_id] != @article.user.id
+          flash[:notice] = "You can only edit or delete your own article"
+          redirect_to article_path(@article)
+        end
+    end
+      
 end

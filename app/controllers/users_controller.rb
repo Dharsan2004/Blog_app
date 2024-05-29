@@ -25,6 +25,7 @@ class UsersController < ApplicationController
     end
 
     def edit 
+        p "in edit user"
         @user  = User.find_by(id: params[:id])
     end
 
